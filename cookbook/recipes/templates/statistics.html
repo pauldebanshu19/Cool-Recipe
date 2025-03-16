@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Recipe Statistics{% endblock %}
+
+{% block content %}
+<div class="py-6">
+    <h1 class="text-2xl font-bold mb-6">Recipe Statistics</h1>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <!-- Cuisine Statistics -->
+        <div class="border rounded p-4">
+            <h2 class="text-xl font-semibold mb-4">Recipes by Cuisine</h2>
+
+            {% if cuisine_stats %}
+            <ul>
+                {% for item in cuisine_stats %}
+                <li class="mb-2">
+                    <span class="font-medium">{{ item.cuisine|default:"Unspecified" }}:</span>
+                    {{ item.count }} recipe{% if item.count != 1 %}s{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No cuisine data available.</p>
+            {% endif %}
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

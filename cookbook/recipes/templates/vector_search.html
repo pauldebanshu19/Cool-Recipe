@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Ingredient Vector Search{% endblock %}
+
+{% block content %}
+<div class="py-4">
+    <h1 class="text-2xl font-bold mb-4">Search Recipes by Ingredients</h1>
+
+    <form method="GET" action="{% url 'ingredient_search' %}" class="mb-6">
+        <div class="flex">
+            <input type="text" name="query" placeholder="Enter ingredients (e.g., chicken, garlic, lemon)"
+                value="{{ query }}" class="px-4 py-2 border rounded-l flex-grow">
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-r hover:bg-blue-700 transition">
+                Search
+            </button>
+        </div>
+        <p class="text-gray-600 text-sm mt-2">Uses AI-powered vector search to find recipes with similar ingredients</p>
+    </form>
+
+    {% if query %}
+    <h2 class="text-lg font-semibold mb-4">Results for "{{ query }}"</h2>
+
+    {% if results %}
+    <div class="space-y-6">
+        {% for recipe in results %}
+        <div class="border rounded-lg p-4 shadow hover:shadow-md transition">
+            <h3 class="text-xl font-semibold mb-2">{{ recipe.title }}</h3>
+            <div class="mb-3">
+                <p class="text-sm text-gray-600">Similarity: {{ recipe.similarity_score|floatformat:2 }}</p>
+            </div>
+            <div class="mb-3">
+                <h4 class="font-medium mb-1">Ingredients:</h4>
+                <ul class="list-disc pl-5">
+                    {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="{% url 'recipe_detail' recipe.id %}" class="text-blue-600 hover:underline">View full recipe</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-gray-600">No recipes found matching your ingredients.</p>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

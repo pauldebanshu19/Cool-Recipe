@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto py-4">
+    <h1 class="text-xl font-semibold mb-3">{{ recipe.title }}</h1>
+
+    {% if recipe.prep_time %}
+    <p class="text-sm text-gray-600 mb-3">Prep time: {{ recipe.prep_time }} minutes</p>
+    {% endif %}
+
+    <div class="mb-4">
+        <h2 class="text-md font-medium mb-1">Ingredients</h2>
+        <div class="pl-4">
+            <ul>
+                {% for ingredient in recipe.ingredients %}
+                <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="text-md font-medium mb-1">Instructions</h2>
+        <div class="pl-4">
+            {{ recipe.instructions|linebreaks }}
+        </div>
+    </div>
+</div>
+{% endblock %}

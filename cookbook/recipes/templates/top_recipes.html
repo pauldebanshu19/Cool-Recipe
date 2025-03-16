@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Alphabetical list of recipes</h1>
+
+{% if recipes %}
+<ul class="list-disc pl-5">
+    {% for recipe in recipes %}
+    <li class="mb-1">
+        <a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+        {% comment  %}
+        {{ recipe.title }}
+        {% endcomment %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No recipes found matching "{{ query }}".</p>
+{% endif %}
+
+{% endblock %}
