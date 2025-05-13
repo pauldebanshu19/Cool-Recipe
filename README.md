@@ -14,7 +14,7 @@ A Django web application for searching recipes using natural language queries, p
 
 1. Clone this repository:
    ```
-   git clone https://github.com/freethrow/dmb-recipes.git
+   https://github.com/pauldebanshu19/Cool-Recipe.git
    cd dmb-recipes
    ```
 
